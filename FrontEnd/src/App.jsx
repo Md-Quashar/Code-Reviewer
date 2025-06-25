@@ -18,7 +18,7 @@ function App() {
     prism.highlightAll()
   }, [])
   const BackendUrl=import.meta.env.VITE_BACKEND_URL
-  console.log(BackendUrl)
+  
   async function getReview() {
     const response = await axios.post(BackendUrl, { code })
     console.log(response.data)
