@@ -5,7 +5,10 @@ const cors = require('cors')  // to communicate with Frontend
 
 const  app=express()
 
-app.use(cors())
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://your-frontend.onrender.com']
+}));
+
 
 app.use(express.json())
 app.get('/', (req,res)=>{

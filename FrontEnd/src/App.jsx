@@ -17,9 +17,10 @@ function App() {
    useEffect(() => {
     prism.highlightAll()
   }, [])
-
+  const BackendUrl=import.meta.env.VITE_BACKEND_URL
+  console.log(BackendUrl)
   async function getReview() {
-    const response = await axios.post('http://localhost:3000/ai/get-review', { code })
+    const response = await axios.post(BackendUrl, { code })
     console.log(response.data)
     setReview(response.data)
   }
