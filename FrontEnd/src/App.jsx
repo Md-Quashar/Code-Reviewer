@@ -6,13 +6,15 @@ import axios from "axios"
 import Markdown from "react-markdown"
 import './App.css'
 
+
 function App() {
   const [code, setCode] = useState(
     `function sum(){
     return a+b
     }`
   )
-  const [review,setReview]=useState("")
+  const [review,setReview]=useState(null)
+  const [loading,setLoading]=useState(false)
 
    useEffect(() => {
     prism.highlightAll()
@@ -20,8 +22,11 @@ function App() {
   const BackendUrl=import.meta.env.VITE_BACKEND_URL
   
   async function getReview() {
+    setReview(null)
+    setLoading(true)
     const response = await axios.post(BackendUrl, { code })
     console.log(response.data)
+    setLoading(false)
     setReview(response.data)
   }
 
@@ -55,7 +60,9 @@ function App() {
 
       </div>
       <div className='right'>
+        {loading && <p>Loading Review...</p>}
         <Markdown>{review}</Markdown>
+        
       </div>
 
      </main>
